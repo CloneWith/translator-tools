@@ -1,6 +1,7 @@
 import cli
 import replace
 from assets import *
+from locales import _
 
 LOOP = True
 ANSSTR = ""

@@ -1,6 +1,7 @@
 import cli
 import os
 from assets import *
+from locales import _
 
 LOOP = True
 ANSSTR = ""
@@ -12,7 +13,7 @@ def exec():
 
 
 def wizard():
-    a = cli.choices(SHARED["choice"][1], REPLACE["modelist"][1])
+    a = cli.choices(_("Select a mode:"), REPLACE["modelist"][1])
 
 
 def repmain():
