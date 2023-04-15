@@ -11,7 +11,7 @@ def getUserLanguage():
 # Get loc string by language
 def getLocStrings():
     currentDir = os.path.dirname(os.path.realpath(__file__))
-    return gettext.translation('resource', currentDir, [getUserLanguage(), "en-US"]).gettext
+    return gettext.translation('resources', currentDir, [getUserLanguage(), "en-US"]).gettext
 
-_ = getLocStrings()
-print(_("Hello"))
+_ = print()
+# print(_("Hello"))

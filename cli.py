@@ -4,11 +4,12 @@ by Sunnyboy971
 Enjoy!
 '''
 from assets import *
+from locales import *
 
 ARGS = "Not Available"
 ARG_TOSTDOUT = False
 ARG_VERBOSE = True
-sym = CLI["sym"][1]
+sym = [_("Fatal"), _("Error"), _("Warning"), _("Info"), _("Detail")]
 
 
 def cmd(prompt: str = "Make", CtrlBehave: str = "", Customstyle: bool = False):
@@ -50,7 +51,7 @@ def argmenu():
     '''
     Return a command line asking for arguments to be added.
     '''
-    ans = cmd(CLI["argcmd"][1], "Empty")
+    ans = cmd(_("Args: [? for help]"), "Empty")
     if ans == "?" or ans == None:
         print(ARGS)
         return argmenu()
@@ -60,44 +61,44 @@ def argmenu():
 
 def choices(prompt: str = "Choose:", ch: list = [], default: str = "", AllowMultiple: bool = False):
     if len(ch) == 0:
-        errorhandler(2, CLI["nae"][1])
+        errorhandler(2, _("Alternatives not found."))
         return []
     if AllowMultiple == True:
-        a = "at least one"
+        a = _("at least one")
     else:
-        a = "one"
+        a = _("one")
     for i in range(len(ch)):
         print("[{0}] {1}".format(i+1, ch[i]), end="\t")
     print()
     if default != "":
-        print(CLI["default"][1].format(default), end=" ")
+        print(_("Default:{}").format(default), end=" ")
     try:
         ans = input(prompt)
     except KeyboardInterrupt:
-        errorhandler(0, CLI["kbi"][1])
+        errorhandler(0, _("User cancelled the process."))
         exit(1)
     except EOFError:
-        errorhandler(0, CLI["eof"][1])
+        errorhandler(0, _("EOF received! Exiting..."))
         exit(1)
     prelist = ans.split(" ")
     anslist = []
     if "" in prelist:
         if default != "":
-            errorhandler(2, CLI["0ed"][1].format(default))
+            errorhandler(2, _("Using default: ").format(default))
             return default
         else:
-            errorhandler(1, CLI["0e"][1].format(a))
+            errorhandler(1, _("You must choose {} from the list.").format(a))
             return choices(prompt, ch, default, AllowMultiple)
     for i in prelist:
         try:
             anslist.append(ch[int(i)-1])
         except ValueError:
-            errorhandler(1, CLI["ve"][1])
+            errorhandler(1, _("Answer with integers please."))
             return choices(prompt, ch, default, AllowMultiple)
         except IndexError:
-            errorhandler(1, CLI["or"][1])
+            errorhandler(1, _("Choice out of range."))
             return choices(prompt, ch, default, AllowMultiple)
     if len(anslist) > 1 and AllowMultiple == False:
-        errorhandler(1, CLI["nmc"][1])
+        errorhandler(1, _("Multiple choices aren't allowed."))
         return choices(prompt, ch, default, AllowMultiple)
     return anslist

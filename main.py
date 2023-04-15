@@ -8,7 +8,7 @@ ANSSTR = ""
 
 def mainloop():
     global LOOP, ANSSTR
-    try: ANSSTR = cli.cmd(SHARED["title"][1])
+    try: ANSSTR = cli.cmd(_("Mainmenu"))
     except KeyboardInterrupt:
         LOOP = False
         return
@@ -16,7 +16,7 @@ def mainloop():
     if verb == "exit": exit(0)
     elif verb == "help": print(HELP["main"])
     elif verb == "replace": replace.exec()
-    else: cli.errorhandler(1, "{0}: {1}".format(verb, SHARED["cnf"][1]))
+    else: cli.errorhandler(1, "{0}: {1}".format(verb, _("Command not found.")))
 
 
 if __name__ == "__main__":

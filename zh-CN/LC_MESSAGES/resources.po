@@ -1,0 +1,114 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2023-04-15 20:05+0800\n"
+"PO-Revision-Date: 2023-04-15 20:10+0800\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 2.4.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#: cli.py:12
+msgid "Detail"
+msgstr "详情"
+
+#: cli.py:12
+msgid "Error"
+msgstr "错误"
+
+#: cli.py:12
+msgid "Fatal"
+msgstr "致命错误"
+
+#: cli.py:12
+msgid "Info"
+msgstr "信息"
+
+#: cli.py:12
+msgid "Warning"
+msgstr "警告"
+
+#: cli.py:54
+msgid "Args: [? for help]"
+msgstr "参数：[输入 ? 获取帮助]"
+
+#: cli.py:64
+msgid "Alternatives not found."
+msgstr "未找到候选项。"
+
+#: cli.py:67
+msgid "at least one"
+msgstr "至少一个"
+
+#: cli.py:69
+msgid "one"
+msgstr "一个"
+
+#: cli.py:74
+msgid "Default:{}"
+msgstr "默认值；{}"
+
+#: cli.py:78
+msgid "User cancelled the process."
+msgstr "用户取消了进程。"
+
+#: cli.py:81
+msgid "EOF received! Exiting..."
+msgstr "收到 EOF 了！正在退出..."
+
+#: cli.py:87
+msgid "Using default: "
+msgstr "将使用默认值："
+
+#: cli.py:90
+msgid "You must choose {} from the list."
+msgstr "必须从列表中选择{}。"
+
+#: cli.py:96
+msgid "Answer with integers please."
+msgstr "使用整数输入。"
+
+#: cli.py:99
+msgid "Choice out of range."
+msgstr "所选项越界了。"
+
+#: cli.py:102
+msgid "Multiple choices aren't allowed."
+msgstr "不允许多选。"
+
+#: main.py:11
+msgid "Mainmenu"
+msgstr "主菜单"
+
+#: main.py:19 replace.py:36
+msgid "Command not found."
+msgstr "未找到命令。"
+
+#: replace.py:8
+msgid "Advanced"
+msgstr "高级模式"
+
+#: replace.py:8
+msgid "Simple"
+msgstr "简单模式"
+
+#: replace.py:8
+msgid "Template"
+msgstr "模板模式"
+
+#: replace.py:17
+msgid "Select a mode:"
+msgstr "选择模式："
+
+#: replace.py:23
+msgid "replace"
+msgstr "替换"

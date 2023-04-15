@@ -5,6 +5,7 @@ from locales import _
 
 LOOP = True
 ANSSTR = ""
+MODELIST = [_("Simple"), _("Advanced"), _("Template")]
 
 
 def exec():
@@ -19,7 +20,7 @@ def wizard():
 def repmain():
     global LOOP, ANSSTR
     try:
-        ANSSTR = cli.cmd(REPLACE["title"][1])
+        ANSSTR = cli.cmd(_("replace"))
     except KeyboardInterrupt:
         LOOP = False
         return
@@ -31,7 +32,8 @@ def repmain():
         print(HELP["replace"])
     elif verb == "wizard":
         wizard()
-    else: cli.errorhandler(1, "{0}: {1}".format(verb, SHARED["cnf"][1]))
+    else:
+        cli.errorhandler(1, "{0}: {1}".format(verb, _("Command not found.")))
 
 # opt = cli.cmd(SHARED["target"][1])
 # tf = open(opt, "r", encoding="utf8")
