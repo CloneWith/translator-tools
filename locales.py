@@ -13,5 +13,5 @@ def getLocStrings():
     currentDir = os.path.dirname(os.path.realpath(__file__))
     return gettext.translation('resources', currentDir, [getUserLanguage(), "en-US"]).gettext
 
-_ = print()
+_ = getLocStrings()
 # print(_("Hello"))

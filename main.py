@@ -16,7 +16,7 @@ def mainloop():
     if verb == "exit": exit(0)
     elif verb == "help": print(HELP["main"])
     elif verb == "replace": replace.exec()
-    else: cli.errorhandler(1, "{0}: {1}".format(verb, _("Command not found.")))
+    else: cli.errorhandler(1, "{0}: {1}".format(verb, SHARED["cnf"]))
 
 
 if __name__ == "__main__":

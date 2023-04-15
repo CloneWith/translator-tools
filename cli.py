@@ -4,15 +4,15 @@ by Sunnyboy971
 Enjoy!
 '''
 from assets import *
-from locales import *
+from locales import _
 
 ARGS = "Not Available"
 ARG_TOSTDOUT = False
 ARG_VERBOSE = True
-sym = [_("Fatal"), _("Error"), _("Warning"), _("Info"), _("Detail")]
+SYM = [_("Fatal"), _("Error"), _("Warning"), _("Info"), _("Detail")]
 
 
-def cmd(prompt: str = "Make", CtrlBehave: str = "", Customstyle: bool = False):
+def cmd(prompt: str = "Make", CtrlBehave: str = "", Customstyle: bool = False, Default: str = ""):
     '''
     Simple command line interface implement.
     '''
@@ -20,6 +20,7 @@ def cmd(prompt: str = "Make", CtrlBehave: str = "", Customstyle: bool = False):
         if Customstyle == True:
             return str(input(prompt))
         else:
+            if Default != "": prompt = _("Default:{}").format(Default) + " " + prompt
             return str(input("[{}] > ".format(prompt)))
     except KeyboardInterrupt:
         print()
@@ -27,6 +28,8 @@ def cmd(prompt: str = "Make", CtrlBehave: str = "", Customstyle: bool = False):
             return cmd(prompt, CtrlBehave)
         elif CtrlBehave == "Empty":
             return ""
+        elif CtrlBehave == "Def":
+            return Default
         else:
             raise KeyboardInterrupt
 
@@ -40,9 +43,9 @@ def errorhandler(type: int = 3, msg: str = "Testing notification."):
     returns a fatal error indicator and make the script exit with code 1.
     '''
     if type == 4 and ARG_VERBOSE == True:
-        print("{0}: {1}".format(sym[type], msg))
+        print("{0}: {1}".format(SYM[type], msg))
     else:
-        print("{0}: {1}".format(sym[type], msg))
+        print("{0}: {1}".format(SYM[type], msg))
     if type == 0:
         exit(1)
 

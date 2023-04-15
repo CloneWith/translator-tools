@@ -1,5 +1,10 @@
 # Translator Tools
 
+**Note: This program is still working in progress. See milestone for details.**
+
 A series of simple tools to satisfy the need of translators
 
-More info to be added here 😊
+## Features
+
+- Friendly command line interface
+- Replace mode and more **(TODO)**
