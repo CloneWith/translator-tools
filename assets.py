@@ -3,12 +3,20 @@ from locales import _
 VER = "0.0.1 20230414"
 
 CREDIT = '''
-=*= Translator Tools =*=
-Made by @Sunnyboy971(https://github.com/Sunnyboy971)
+\033[1m=*= Translator Tools =*=\033[0m
+Made by \033[1;36m@Sunnyboy971\033[0m(https://github.com/Sunnyboy971)
 '''
 
 CLI = {
     "na": ["Not Available", "内容暂时不可用。"],
+}
+
+COLORS = {
+    "red": "\033[31m",
+    "green": "\033[32m",
+    "yellow": "\033[33m",
+    "blue": "\033[34m",
+    "bold": "\033[1;0m"
 }
 
 SHARED = {

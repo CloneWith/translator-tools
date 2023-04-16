@@ -11,6 +11,7 @@ TARGET = ""
 SRCSTR = ""
 TAGSTR = ""
 
+
 def exec():
     while LOOP == True:
         repmain()
@@ -23,10 +24,16 @@ def wizard():
 def repmain():
     global LOOP, ANSSTR, SRCSTR, TAGSTR, PRESTR
     target = ""
-    if SRCSTR == "" and TAGSTR == "": PRESTR = ""
-    elif SRCSTR == "": PRESTR = " ? -> \"{}\"".format(TAGSTR)
-    elif TAGSTR == "": PRESTR = " \"{}\" -> \"\"".format(SRCSTR)
-    else: PRESTR = " \"{0}\" -> \"{1}\"".format(SRCSTR, TAGSTR)
+    if SRCSTR == "" and TAGSTR == "":
+        PRESTR = ""
+    elif SRCSTR == "":
+        PRESTR = " \033[5;33m?\033[0m -> \"\033[1;36m{}\033[0m\"".format(
+            TAGSTR)
+    elif TAGSTR == "":
+        PRESTR = " \"\033[1;36m{}\033[0m\" -> \"\"".format(SRCSTR)
+    else:
+        PRESTR = " \"\033[1;36m{0}\033[0m\" -> \"\033[1;36m{1}\033[0m\"".format(
+            SRCSTR, TAGSTR)
     try:
         ANSSTR = cli.cmd(_("replace") + PRESTR)
     except KeyboardInterrupt:
@@ -42,32 +49,37 @@ def repmain():
     elif verb == "open":
         if len(slist) == 1:
             target = cli.cmd(SHARED["target"], "Empty")
-        else: target = slist[1]
+        else:
+            target = slist[1]
         try:
             global TARGET
             TARGET = open(target, "r", encoding="utf8")
         except FileNotFoundError:
             cli.errorhandler(1, SHARED["cnf"])
         else:
-            cli.errorhandler(3,SHARED["fopened"].format(target))
+            cli.errorhandler(3, SHARED["fopened"].format(target))
     elif verb == "close":
-        if TARGET == "": cli.errorhandler(2,SHARED["faclosed"])
+        if TARGET == "":
+            cli.errorhandler(2, SHARED["faclosed"])
         else:
             TARGET.close()
-            cli.errorhandler(3,SHARED["fclosed"].format(TARGET))
+            cli.errorhandler(3, SHARED["fclosed"].format(TARGET))
             TARGET = ""
     elif verb == "source":
         if len(slist) == 1:
             SRCSTR = cli.cmd(REPLACE["source"], "Default", Default=SRCSTR)
-        else: SRCSTR = slist[1]
+        else:
+            SRCSTR = slist[1]
     elif verb == "target":
         if len(slist) == 1:
             TAGSTR = cli.cmd(REPLACE["target"], "Default", Default=TAGSTR)
-        else: TAGSTR = slist[1]
+        else:
+            TAGSTR = slist[1]
     elif verb == "wizard":
         wizard()
     else:
         cli.errorhandler(1, "{0}: {1}".format(verb, SHARED["cnf"]))
+
 
 # opt = cli.cmd(SHARED["target"][1])
 # tf = open(opt, "r", encoding="utf8")
