@@ -5,77 +5,208 @@ from locales import _
 
 LOOP = True
 PRESTR = ""
-ANSSTR = ""
-MODELIST = [_("Simple"), _("Advanced"), _("Template")]
+MODE = _("Simple")
+SLIST = []
+# This is a file
 TARGET = ""
+WTARGET = ""
+BUFFER = []
 SRCSTR = ""
 TAGSTR = ""
+OUTSTR = ""
+TODO = []
+
 
 def exec():
     while LOOP == True:
         repmain()
 
 
-def wizard():
-    a = cli.choices(_("Select a mode:"), REPLACE["modelist"][1])
+def fileio(target: str, typ: str):
+    global TARGET, BUFFER, WTARGET
+    if typ == "open":
+        try:
+            TARGET = open(target, "r", encoding="utf8")
+            BUFFER = TARGET.read().split("\n")
+        except FileNotFoundError:
+            cli.errorhandler(1, SHARED["cnf"])
+        else:
+            cli.errorhandler(3, SHARED["fopened"].format(target))
+    elif typ == "close":
+        if TARGET == "":
+            cli.errorhandler(2, SHARED["faclosed"])
+        else:
+            TARGET.close()
+            cli.errorhandler(3, SHARED["fclosed"].format(TARGET.name))
+            TARGET = ""
+    elif typ == "write":
+        if TARGET == "" and target == "":
+            cli.errorhandler(2, SHARED["faclosed"])
+        else:
+            try:
+                if target == "":
+                    TARGET.close()
+                    WTARGET = open(TARGET.name, "x", encoding="utf8")
+                else:
+                    WTARGET = open(target, "x", encoding="utf8")
+            except FileExistsError:
+                cli.errorhandler(2, SHARED["overwrite"])
+                try:
+                    os.remove(target)
+                except PermissionError:
+                    cli.errorhandler(1, SHARED["permission"])
+                    return
+                WTARGET = open(target, "x", encoding="utf8")
+            for i in BUFFER:
+                WTARGET.write(i + "\n")
+            cli.errorhandler(3, SHARED["sfinished"].format(WTARGET.name))
+            WTARGET.close()
+            # This line still has problems. Have the need to open TARGET? <TODO>
+            # if TARGET != "": TARGET = open(TARGET.name, "r", encoding="utf8")
+
+    return
+
+
+def mkcmd():
+    global PRESTR, SRCSTR, TAGSTR, TODO
+    if SRCSTR == "" and TAGSTR == "":
+        PRESTR = ""
+    elif SRCSTR == "":
+        PRESTR = " \033[5;33m?\033[0m -> \"\033[1;36m{}\033[0m\"".format(
+            TAGSTR)
+    elif TAGSTR == "":
+        PRESTR = " \"\033[1;36m{}\033[0m\" -> \"\"".format(SRCSTR)
+    else:
+        PRESTR = " \"\033[1;36m{0}\033[0m\" -> \"\033[1;36m{1}\033[0m\"".format(
+            SRCSTR, TAGSTR)
+    if len(TODO) != 0:
+        PRESTR += " \033[1;36m*\033[0m"
+
+
+def mtodo():
+    global TODO, SLIST, SRCSTR, TAGSTR, MODE
+    if len(SLIST) == 0:
+        cli.errorhandler(1, SHARED["argn"].format("todo"))
+        return
+    verbt = SLIST[0]
+    if verbt == "add":
+        TODO.append([len(TODO) + 1, MODE, SRCSTR, TAGSTR])
+        SRCSTR = TAGSTR = ""
+    if verbt == "list":
+        if len(TODO) == 0:
+            cli.errorhandler(3, REPLACE["ntodo"])
+        else:
+            print(SHARED["total"].format(len(TODO)))
+            for i in TODO:
+                print("[{0} {1}] \"{2}\" -> \"{3}\"".format(i[0], i[1], i[2], i[3]))
+    if verbt == "exec":
+        while len(TODO) != 0:
+            doreplace(TODO[0][1], TODO[0][2], TODO[0][3])
+            TODO.pop(0)
+    return
+
+
+def doreplace(typ: str, src: str, tag: str):
+    global BUFFER
+    cli.errorhandler(3, REPLACE["doing"].format(typ, src, tag))
+    if typ == REPLACE["modelist"][0]:
+        for i in range(len(BUFFER)):
+            BUFFER[i] = BUFFER[i].replace(src, tag)
+    elif typ == REPLACE["modelist"][1]:
+        pass
+    elif typ == REPLACE["modelist"][2]:
+        pass
+    pass
+
+
+def preview():
+    global BUFFER
+    for i in BUFFER:
+        print(i)
+    return
+
+
+def mode():
+    global MODE
+    MODE = cli.choices(_("Select a mode:"), REPLACE["modelist"])[0]
 
 
 def repmain():
-    global LOOP, ANSSTR, SRCSTR, TAGSTR, PRESTR
+    global LOOP, SRCSTR, TAGSTR, PRESTR, OUTSTR, MODE, SLIST
     target = ""
-    if SRCSTR == "" and TAGSTR == "": PRESTR = ""
-    elif SRCSTR == "": PRESTR = " ? -> \"{}\"".format(TAGSTR)
-    elif TAGSTR == "": PRESTR = " \"{}\" -> \"\"".format(SRCSTR)
-    else: PRESTR = " \"{0}\" -> \"{1}\"".format(SRCSTR, TAGSTR)
+    mkcmd()
     try:
-        ANSSTR = cli.cmd(_("replace") + PRESTR)
+        ansstr = cli.cmd("\033[1;36m{0}\033[0m".format(
+            MODE) + _("replace") + PRESTR)
     except KeyboardInterrupt:
         LOOP = False
         return
-    slist = ANSSTR.strip().split(" ")
-    verb = slist[0]
+    SLIST = ansstr.strip().split(" ")
+    verb = SLIST[0]
     if verb == "exit":
         LOOP = False
         return
     elif verb == "help":
         print(HELP["replace"])
+    elif verb == "todo":
+        SLIST.pop(0)
+        mtodo()
     elif verb == "open":
-        if len(slist) == 1:
+        if len(SLIST) == 1:
             target = cli.cmd(SHARED["target"], "Empty")
-        else: target = slist[1]
-        try:
-            global TARGET
-            TARGET = open(target, "r", encoding="utf8")
-        except FileNotFoundError:
-            cli.errorhandler(1, SHARED["cnf"])
         else:
-            cli.errorhandler(3,SHARED["fopened"].format(target))
-    elif verb == "close":
-        if TARGET == "": cli.errorhandler(2,SHARED["faclosed"])
-        else:
-            TARGET.close()
-            cli.errorhandler(3,SHARED["fclosed"].format(TARGET))
-            TARGET = ""
-    elif verb == "source":
-        if len(slist) == 1:
-            SRCSTR = cli.cmd(REPLACE["source"], "Default", Default=SRCSTR)
-        else: SRCSTR = slist[1]
-    elif verb == "target":
-        if len(slist) == 1:
-            TAGSTR = cli.cmd(REPLACE["target"], "Default", Default=TAGSTR)
-        else: TAGSTR = slist[1]
-    elif verb == "wizard":
-        wizard()
-    else:
-        cli.errorhandler(1, "{0}: {1}".format(verb, SHARED["cnf"]))
+            target = SLIST[1]
+        fileio(target, "open")
 
-# opt = cli.cmd(SHARED["target"][1])
-# tf = open(opt, "r", encoding="utf8")
-# ans = cli.choices("")
-# src = cli.cmd(REPLACE["source"][1])
-# tga = cli.cmd(REPLACE["target"][1])
-#
-# tf.close()
-#
+    elif verb == "close":
+        fileio("", "close")
+
+    elif verb == "source":
+        if len(SLIST) == 1:
+            SRCSTR = cli.cmd(REPLACE["source"], "Default", Default=SRCSTR)
+        else:
+            SLIST.pop(0)
+            SRCSTR = SLIST.pop(0)
+            for i in SLIST:
+                SRCSTR += " " + i
+    elif verb == "target":
+        if len(SLIST) == 1:
+            TAGSTR = cli.cmd(REPLACE["target"], "Default", Default=TAGSTR)
+        else:
+            SLIST.pop(0)
+            TAGSTR = SLIST.pop(0)
+            for i in SLIST:
+                TAGSTR += " " + i
+    elif verb == "mode":
+        if len(SLIST) == 1:
+            mode()
+        else:
+            try:
+                MODE = REPLACE["modelist"][int(SLIST[1])]
+            except (TypeError, ValueError, IndexError):
+                cli.errorhandler(1, SHARED["invalid"])
+    elif verb == "save":
+        ans = cli.choices(SHARED["aoverwrite"],
+                          SHARED["yesno"], SHARED["yesno"][0])
+        if ans == SHARED["yesno"][1]:
+            fileio("", "write")
+    elif verb == "saveas":
+        if len(SLIST) == 1:
+            OUTSTR = cli.cmd(SHARED["target"], "Empty")
+            OUTSTR = OUTSTR.split(" ")
+            for i in OUTSTR:
+                fileio(i, "write")
+        else:
+            SLIST.pop(0)
+            OUTSTR = SLIST
+            for i in OUTSTR:
+                fileio(i, "write")
+    elif verb == "preview":
+        preview()
+    else:
+        if verb != "":
+            cli.errorhandler(1, "{0}: {1}".format(verb, SHARED["cnf"]))
+
+
 if __name__ == "__main__":
     exec()

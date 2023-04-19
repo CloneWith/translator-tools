@@ -14,6 +14,7 @@ def mainloop():
         return
     verb = ANSSTR.strip().split(" ")[0]
     if verb == "exit": exit(0)
+    elif verb == "about": print(CREDIT)
     elif verb == "help": print(HELP["main"])
     elif verb == "replace": replace.exec()
     else: cli.errorhandler(1, "{0}: {1}".format(verb, SHARED["cnf"]))

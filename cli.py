@@ -9,7 +9,9 @@ from locales import _
 ARGS = "Not Available"
 ARG_TOSTDOUT = False
 ARG_VERBOSE = True
-SYM = [_("Fatal"), _("Error"), _("Warning"), _("Info"), _("Detail")]
+COLOR_POST = "\033[0m"
+SYM = [COLORS["red"]+_("Fatal")+COLOR_POST, COLORS["red"] + _("Error")+COLOR_POST,
+       COLORS["yellow"]+_("Warning")+COLOR_POST, COLORS["bold"]+_("Info")+COLOR_POST, _("Detail")]
 
 
 def cmd(prompt: str = "Make", CtrlBehave: str = "", Customstyle: bool = False, Default: str = ""):
@@ -20,7 +22,8 @@ def cmd(prompt: str = "Make", CtrlBehave: str = "", Customstyle: bool = False, D
         if Customstyle == True:
             return str(input(prompt))
         else:
-            if Default != "": prompt = _("Default:{}").format(Default) + " " + prompt
+            if Default != "":
+                prompt = _("Default:{}").format(Default) + " " + prompt
             return str(input("[{}] > ".format(prompt)))
     except KeyboardInterrupt:
         print()
