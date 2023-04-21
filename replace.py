@@ -110,10 +110,54 @@ def doreplace(typ: str, src: str, tag: str):
     global BUFFER
     cli.errorhandler(3, REPLACE["doing"].format(typ, src, tag))
     if typ == REPLACE["modelist"][0]:
+        # Simple mode
         for i in range(len(BUFFER)):
             BUFFER[i] = BUFFER[i].replace(src, tag)
     elif typ == REPLACE["modelist"][1]:
-        pass
+        # Advanced mode
+        s = src.partition("{*}")
+        t = tag.partition("{*}")
+        sa = s.index("{*}")
+        ta = t.index("{*}")
+        if (s[2] == "" and s[1] == "") or (t[2] == "" and t[1] == ""):
+            cli.errorhandler(2, REPLACE["rerror"].format(src))
+            return
+        else:
+            # Multiple *s not supported yet <TODO>
+            for i in range(len(BUFFER)):
+                loc1 = loc2 = 0
+                tmp = ""
+                ss = tt = ""
+                if sa == 0:
+                    loc2 = BUFFER[i].find(s[1])
+                    if loc2 == -1: return
+                    tmp = BUFFER[i][0:loc2]
+                    ss = BUFFER[i][0:loc2+len(s[2])+1]
+                else:
+                    try:
+                        s.index("")
+                    except ValueError:
+                        loc1 = BUFFER[i].find(s[0])
+                        loc2 = BUFFER[i].find(s[2])
+                        if loc2 == -1 or loc1 == -1: return
+                        tmp = BUFFER[i][loc1+len(s[0]):loc2]
+                        ss = BUFFER[i][loc1:loc2+len(s[2])+1]
+                    else:
+                        loc1 = BUFFER[i].find(s[0])
+                        if loc1 == -1: return
+                        tmp = BUFFER[i][-(loc1+len(s[0]))]
+                        ss = BUFFER[i][-(loc1-len(s[0]))]
+                if ta == 0:
+                    tt = tmp + t[1]
+                else:
+                    try:
+                        s.index("")
+                    except ValueError:
+                        tt = t[0] + tmp + t[2]
+                    else:
+                        tt = t[0] + tmp
+                # "What is {*}?" -> "{*} 是什么？"
+                BUFFER[i] = BUFFER[i].replace(ss, tt)
     elif typ == REPLACE["modelist"][2]:
         pass
     pass

@@ -7,6 +7,8 @@ CREDIT = '''
 Made by \033[1;36m@Sunnyboy971\033[0m(https://github.com/Sunnyboy971)
 '''
 
+WEB = "https://github.com/Sunnyboy971/translator-tools"
+
 CLI = {
     "na": _("Not Available")
 }
@@ -35,6 +37,7 @@ SHARED = {
     "sfinished": _("Successfully write to {}."),
     "finished": _("Operation done."),
     "permission": _("Permission denied. Check if you can access the specified file."),
+    "ns": _("{} feature not supported yet. Please keep up with our Github project page for details!"),
     "total": _("Total:{}")
 }
 
@@ -45,7 +48,9 @@ REPLACE = {
     "target": _("Replace to:"),
     "ntodo": _("We have nothing to do currently."),
     "doing": _("Using {0} to replace {1} to {2} ..."),
-    "replaceall": _("Replace all occurences in the file?")
+    "rerror": _("Cannot parse {}. Make sure everything is right."),
+    "replaceall": _("Replace all occurences in the file?"),
+    "nsf1": _("Multiple {*}s")
 }
 
 HELP = {
