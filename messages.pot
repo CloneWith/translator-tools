@@ -1,0 +1,251 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2023-04-21 19:36+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=cp936\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: assets.py:13
+msgid "Not Available"
+msgstr ""
+
+#: assets.py:25
+msgid "No"
+msgstr ""
+
+#: assets.py:25
+msgid "Yes"
+msgstr ""
+
+#: assets.py:26
+msgid "Target file:"
+msgstr ""
+
+#: assets.py:27
+msgid "Command not found."
+msgstr ""
+
+#: assets.py:28
+msgid "Invalid input."
+msgstr ""
+
+#: assets.py:29
+msgid "{} needs an argument."
+msgstr ""
+
+#: assets.py:30
+msgid "An unknown error just occurred. Please report the problem at your convience on Github."
+msgstr ""
+
+#: assets.py:31
+msgid "Selection:"
+msgstr ""
+
+#: assets.py:32
+msgid "File opened: {}"
+msgstr ""
+
+#: assets.py:33
+msgid "File closed: {}"
+msgstr ""
+
+#: assets.py:34
+msgid "No opened file found."
+msgstr ""
+
+#: assets.py:35
+msgid ""
+"Do you really want to save directly over {} ?\n"
+"This is considered unsafe, and we suggest using saveas."
+msgstr ""
+
+#: assets.py:36
+msgid "Overwriting existing {} !"
+msgstr ""
+
+#: assets.py:37
+msgid "Successfully write to {}."
+msgstr ""
+
+#: assets.py:38
+msgid "Operation done."
+msgstr ""
+
+#: assets.py:39
+msgid "Permission denied. Check if you can access the specified file."
+msgstr ""
+
+#: assets.py:40
+msgid "{} feature not supported yet. Please keep up with our Github project page for details!"
+msgstr ""
+
+#: assets.py:41
+msgid "Total:{}"
+msgstr ""
+
+#: assets.py:45
+msgid "Replace"
+msgstr ""
+
+#: assets.py:46
+msgid "Advanced"
+msgstr ""
+
+#: assets.py:46
+msgid "Template"
+msgstr ""
+
+#: assets.py:46 replace.py:8
+msgid "Simple"
+msgstr ""
+
+#: assets.py:47
+msgid "String to be replaced:"
+msgstr ""
+
+#: assets.py:48
+msgid "Replace to:"
+msgstr ""
+
+#: assets.py:49
+msgid "We have nothing to do currently."
+msgstr ""
+
+#: assets.py:50
+msgid "Using {0} to replace {1} to {2} ..."
+msgstr ""
+
+#: assets.py:51
+msgid "Cannot parse {}. Make sure everything is right."
+msgstr ""
+
+#: assets.py:52
+msgid "Replace all occurences in the file?"
+msgstr ""
+
+#: assets.py:53
+msgid "Multiple {*}s"
+msgstr ""
+
+#: assets.py:57
+msgid ""
+"\n"
+"    Available commands:\n"
+"    help: Display this help message.\n"
+"    exit: Exit the program.\n"
+"    about: Show author of the program.\n"
+"    replace: Enter replace mode.\n"
+"    [Tip: In the command line, you can go back using ^C.]\n"
+"    "
+msgstr ""
+
+#: assets.py:65
+msgid ""
+"\n"
+"    Available commands in replace mode:\n"
+"    help: Display this help message.\n"
+"    exit: Go back to the main menu.\n"
+"    wizard: Go through the wizard to do what you want to do.\n"
+"    open: Open the specific file.\n"
+"    close: Close opened files.\n"
+"    mode: Choose the replace mode. Available: simple, advanced, template.\n"
+"    source: Specify the string to be replaced.\n"
+"    target: Specift the string to be replaced with the source string.\n"
+"    exec: Execute staged operations to the buffer.\n"
+"    preview: Preview the changes.\n"
+"    reveal: Cancel all the changes.\n"
+"    save: Write changes to the opened file.\n"
+"    saveas: Write changes to another file specified.\n"
+"    "
+msgstr ""
+
+#: cli.py:13
+msgid "Error"
+msgstr ""
+
+#: cli.py:13
+msgid "Fatal"
+msgstr ""
+
+#: cli.py:14
+msgid "Detail"
+msgstr ""
+
+#: cli.py:14
+msgid "Info"
+msgstr ""
+
+#: cli.py:14
+msgid "Warning"
+msgstr ""
+
+#: cli.py:26 cli.py:80
+msgid "Default:{}"
+msgstr ""
+
+#: cli.py:60
+msgid "Args: [? for help]"
+msgstr ""
+
+#: cli.py:70
+msgid "Alternatives not found."
+msgstr ""
+
+#: cli.py:73
+msgid "at least one"
+msgstr ""
+
+#: cli.py:75
+msgid "one"
+msgstr ""
+
+#: cli.py:84
+msgid "User cancelled the process."
+msgstr ""
+
+#: cli.py:87
+msgid "EOF received! Exiting..."
+msgstr ""
+
+#: cli.py:93
+msgid "Using default: "
+msgstr ""
+
+#: cli.py:96
+msgid "You must choose {} from the list."
+msgstr ""
+
+#: cli.py:102
+msgid "Answer with integers please."
+msgstr ""
+
+#: cli.py:105
+msgid "Choice out of range."
+msgstr ""
+
+#: cli.py:108
+msgid "Multiple choices aren't allowed."
+msgstr ""
+
+#: main.py:11
+msgid "Mainmenu"
+msgstr ""
+
+#: replace.py:175
+msgid "Select a mode:"
+msgstr ""
+
+#: replace.py:184
+msgid "replace"
+msgstr ""
+
