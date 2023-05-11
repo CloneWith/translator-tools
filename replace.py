@@ -155,6 +155,7 @@ def doreplace(typ: str, src: str, tag: str):
                     except ValueError:
                         tt = t[0] + tmp + t[2]
                     else:
+                        BUFFER[i] = BUFFER[i].replace(s[2],"")
                         tt = t[0] + tmp
                 # "What is {*}?" -> "{*} 是什么？"
                 BUFFER[i] = BUFFER[i].replace(ss, tt)
