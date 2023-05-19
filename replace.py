@@ -143,10 +143,11 @@ def doreplace(typ: str, src: str, tag: str):
                         tmp = BUFFER[i][loc1+len(s[0]):loc2]
                         ss = BUFFER[i][loc1:loc2+len(s[2])+1]
                     else:
+                        # loc1 is the start pos of source str found
                         loc1 = BUFFER[i].find(s[0])
                         if loc1 == -1: continue
-                        tmp = BUFFER[i][-(loc1+len(s[0]))]
-                        ss = BUFFER[i][-(loc1-len(s[0]))]
+                        tmp = BUFFER[i][(loc1+len(s[0])):len(BUFFER[i])]
+                        ss = BUFFER[i][loc1 : len(BUFFER[i])]
                 if ta == 0:
                     tt = tmp + t[1]
                 else:
@@ -156,7 +157,7 @@ def doreplace(typ: str, src: str, tag: str):
                         tt = t[0] + tmp + t[2]
                     else:
                         BUFFER[i] = BUFFER[i].replace(s[2],"")
-                        tt = t[0] + tmp
+                        tt = t[0] + tmp + t[2]
                 # "What is {*}?" -> "{*} 是什么？"
                 BUFFER[i] = BUFFER[i].replace(ss, tt)
     elif typ == REPLACE["modelist"][2]:
