@@ -130,7 +130,7 @@ def doreplace(typ: str, src: str, tag: str):
                 ss = tt = ""
                 if sa == 0:
                     loc2 = BUFFER[i].find(s[1])
-                    if loc2 == -1: return
+                    if loc2 == -1: continue
                     tmp = BUFFER[i][0:loc2]
                     ss = BUFFER[i][0:loc2+len(s[2])+1]
                 else:
@@ -139,12 +139,12 @@ def doreplace(typ: str, src: str, tag: str):
                     except ValueError:
                         loc1 = BUFFER[i].find(s[0])
                         loc2 = BUFFER[i].find(s[2])
-                        if loc2 == -1 or loc1 == -1: return
+                        if loc2 == -1 or loc1 == -1: continue
                         tmp = BUFFER[i][loc1+len(s[0]):loc2]
                         ss = BUFFER[i][loc1:loc2+len(s[2])+1]
                     else:
                         loc1 = BUFFER[i].find(s[0])
-                        if loc1 == -1: return
+                        if loc1 == -1: continue
                         tmp = BUFFER[i][-(loc1+len(s[0]))]
                         ss = BUFFER[i][-(loc1-len(s[0]))]
                 if ta == 0:
