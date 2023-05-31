@@ -38,6 +38,7 @@ SHARED = {
     "finished": _("Operation done."),
     "permission": _("Permission denied. Check if you can access the specified file."),
     "ns": _("{} feature not supported yet. Please keep up with our Github project page for details!"),
+    "nm": _("We are still writing help messages for {}. Check it out later!"),
     "total": _("Total:{}")
 }
 
@@ -79,3 +80,9 @@ HELP = {
     saveas: Write changes to another file specified.
     """)
 }
+
+def gethelp(index: str):
+    try:
+        return HELP[index]
+    except KeyError:
+        return SHARED["nm"].format(index)
